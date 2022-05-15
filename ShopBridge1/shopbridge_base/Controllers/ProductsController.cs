@@ -66,6 +66,7 @@ namespace Shopbridge_base.Controllers
             try
             {
                 if (id <= 0) return StatusCode(StatusCodes.Status400BadRequest, "Invalid Parameters");
+                if (string.IsNullOrEmpty(product.Name)) return StatusCode(StatusCodes.Status400BadRequest, "Product Name is Required");
                 var productExists = await productService.ProductExists(id);
                 if(!productExists) return StatusCode(StatusCodes.Status400BadRequest, "Product with specified id doesn't exist");
                 var updatedProduct = await productService.PutProduct(id, product);
